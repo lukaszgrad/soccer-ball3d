@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video: A Multi-Model Benchmark">
+  <meta property="og:title"
+    content="Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video" />
+  <meta property="og:description"
+    content="A multi-model benchmark for physics-based 3D ball trajectory reconstruction from monocular soccer video, evaluating seven arc models across five datasets." />
+  <meta property="og:url" content="https://lukaszgrad.github.io/soccer-ball3d/" />
+  <meta property="og:image" content="static/images/fig1_datasets.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:title"
+    content="Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video">
+  <meta name="twitter:description"
+    content="A multi-model benchmark for physics-based 3D ball trajectory reconstruction from monocular soccer video.">
+  <meta name="twitter:image" content="static/images/fig1_datasets.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords"
+    content="3D ball trajectory, soccer, football, physics-based reconstruction, monocular video, trajectory estimation, benchmark, computer vision, sports analytics, CVPR 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lukasz Grad">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+
+  <title>Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video</title>
+  <link rel="icon" type="image/x-icon" href="static/images/rv_logo.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Physics-Based 3D Ball Trajectory Reconstruction
+              from Monocular Soccer Video: A Multi-Model Benchmark</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/%C5%82ukasz-grad-1942a5173/"
+                  target="_blank">&Lstrok;ukasz Grad</a><sup>1,2,*</sup>,
+              </span>
+              <span class="author-block">
+                Krzysztof M. Czajkowski<sup>2,*</sup>,
+              </span>
+              <span class="author-block">
+                Aliaksandr Varashylau<sup>2,*</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>University of Warsaw &nbsp;
+                <sup>2</sup>ReSpo.Vision
+              </span>
+              <br>
+              <span class="author-block" style="font-size: 0.9em;">
+                <sup>*</sup>Equal contribution
+              </span>
+              <br>
+              <span class="author-block">
+                <a href="https://cvpr.thecvf.com/Conferences/2026" target="_blank">CVPR 2026</a>
+              </span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper PDF link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark"
+                    title="Coming soon">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark"
+                    title="Coming soon">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark"
+                    title="Coming soon">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Dataset link -->
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark"
+                    title="Coming soon">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser image -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img src="static/images/fig1_datasets.png" alt="Dataset overview"
+          style="width: 100%;" />
+        <h2 class="subtitle has-text-centered is-size-6">
+          <strong>Dataset overview.</strong> Each column shows one of the five evaluation datasets
+          from two different viewpoints or sequences. Orange curves depict ground-truth 3D ball
+          trajectories projected onto the image; light-blue dots mark segment endpoints (pivot
+          points). The datasets span soccer and basketball, static multi-camera and dynamic broadcast
+          setups, and resolutions from 1080p to 4K.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser image -->
+
+
+  <!-- Abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We study physics-based 3D ball trajectory reconstruction from monocular soccer video.
+              Our pipeline segments the trajectory at contact events and fits each segment by
+              optimizing a forward-simulated flight model with a reprojection-based objective. We
+              implement seven arc models of increasing complexity&mdash;from gravity-only parabolas
+              to MuJoCo simulations with drag, spin, and fluid forces&mdash;and evaluate all seven
+              under end-to-end monocular reconstruction with four models additionally evaluated
+              under oracle 3D fitting.
+            </p>
+            <p>
+              The two protocols yield opposite model rankings: a model with a free gravitational
+              constant achieves the best accuracy under monocular reconstruction on all evaluation
+              settings, yet a spin-decomposition model leads on four of five datasets when fitted to
+              3D ground truth&mdash;showing that, among the models tested, observation noise and the
+              inherent geometric ambiguity of monocular reconstruction, rather than model
+              expressiveness, are the current bottleneck.
+            </p>
+            <p>
+              Consistent with this, on the same match the broadcast view yields substantially higher
+              arc error than static cameras. We release three new soccer datasets&mdash;two with
+              triangulated 3D ground truth, one broadcast benchmark&mdash;along with segment-level
+              annotations for APIDIS and ISSIA-3D, forming a five-dataset evaluation benchmark
+              spanning nearly 6,000 trajectory segments.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End abstract -->
+
+
+  <!-- Method overview -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Method Overview</h2>
+          <div class="content has-text-justified">
+            <img src="static/images/fig2_pipeline.png" alt="Pipeline overview"
+              style="width: 100%; margin-bottom: 1rem;" />
+            <p class="has-text-centered" style="font-style: italic;">
+              <strong>Overview of the 3D Trajectory Reconstruction Pipeline.</strong>
+              A monocular input video, ball and player features and camera calibration (K, [R|t])
+              are given. Pivot points and playtime from manual annotation segment the sequence, which
+              is fitted in an optimization loop: a physics engine simulates and reprojects the 3D
+              path to iteratively improve trajectory parameters. Finally, the pipeline corrects high
+              pivots, re-fits the affected segments, and rejects invalid segments.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End method overview -->
+
+
+  <!-- Physics models table -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Physics Models</h2>
+      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+        Comparison of arc physics models for projectile motion simulation. All models share the same
+        straight (on-ground) model with 5 parameters. N<sub>&theta;</sub> denotes the number of free
+        parameters optimized per arc segment.
+      </p>
+      <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Framework</th>
+              <th>Gravity</th>
+              <th>Drag</th>
+              <th>Magnus</th>
+              <th>Spin (&omega;<sub>0</sub>)</th>
+              <th>N<sub>&theta;</sub></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Basic parabola</td>
+              <td>ODE</td>
+              <td>fixed</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Basic kinetic</td>
+              <td>ODE</td>
+              <td>fixed</td>
+              <td>k<sub>3</sub></td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Basic fitg</td>
+              <td>ODE</td>
+              <td>fitted*</td>
+              <td>k<sub>3</sub></td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Basic angular</td>
+              <td>ODE</td>
+              <td>fixed</td>
+              <td>k<sub>3</sub></td>
+              <td>k<sub>l</sub>, k<sub>s</sub></td>
+              <td>&mdash;</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>MuJoCo kinetic</td>
+              <td>MuJoCo ODE</td>
+              <td>fixed</td>
+              <td>fixed&dagger;</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>MuJoCo angular</td>
+              <td>MuJoCo ODE</td>
+              <td>fixed</td>
+              <td>fixed&dagger;</td>
+              <td>&mdash;</td>
+              <td>&check;</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>MuJoCo ellipsoid</td>
+              <td>MuJoCo ODE</td>
+              <td>fixed</td>
+              <td>C<sub>D</sub><sup>blunt</sup>, C<sub>D</sub><sup>ang</sup></td>
+              <td>C<sub>M</sub></td>
+              <td>&check;</td>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="is-size-7">
+        * Gravity is fitted rather than fixed, acting as a proxy for unmodelled forces.<br>
+        &dagger; MuJoCo's inertia-based fluid model provides drag with fixed parameters derived from
+        fluid density and body inertia.
+      </p>
+    </div>
+  </section>
+  <!-- End physics models table -->
+
+
+  <!-- Results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Results</h2>
+
+      <!-- Monocular reconstruction results -->
+      <h3 class="title is-4 has-text-centered">End-to-End Monocular Reconstruction</h3>
+      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+        Balanced mAP (mAP<sub>bal</sub>) and arc-specific mAP (mAP<sub>arc</sub>); higher is
+        better. Best per column in <strong>bold</strong>.
+      </p>
+      <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th rowspan="2" style="vertical-align: middle;">Model</th>
+              <th colspan="2" class="has-text-centered">LP-static</th>
+              <th colspan="2" class="has-text-centered">LP-broadcast</th>
+              <th colspan="2" class="has-text-centered">EB</th>
+              <th colspan="2" class="has-text-centered">SW</th>
+              <th colspan="2" class="has-text-centered">ISSIA-3D</th>
+              <th colspan="2" class="has-text-centered">APIDIS</th>
+            </tr>
+            <tr>
+              <th>bal</th>
+              <th>arc</th>
+              <th>bal</th>
+              <th>arc</th>
+              <th>bal</th>
+              <th>arc</th>
+              <th>bal</th>
+              <th>arc</th>
+              <th>bal</th>
+              <th>arc</th>
+              <th>bal</th>
+              <th>arc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>basic parabola</td>
+              <td>.325</td><td>.274</td>
+              <td>.493</td><td>.330</td>
+              <td>.533</td><td>.357</td>
+              <td>.421</td><td>.351</td>
+              <td>.260</td><td>.159</td>
+              <td><strong>.577</strong></td><td><strong>.577</strong></td>
+            </tr>
+            <tr>
+              <td>basic kinetic</td>
+              <td>.332</td><td>.289</td>
+              <td>.508</td><td>.359</td>
+              <td>.532</td><td>.359</td>
+              <td>.414</td><td>.355</td>
+              <td>.253</td><td>.153</td>
+              <td>.476</td><td>.476</td>
+            </tr>
+            <tr>
+              <td><strong>basic fitg</strong></td>
+              <td><strong>.343</strong></td><td><strong>.307</strong></td>
+              <td><strong>.530</strong></td><td><strong>.397</strong></td>
+              <td><strong>.557</strong></td><td><strong>.412</strong></td>
+              <td><strong>.459</strong></td><td><strong>.371</strong></td>
+              <td><strong>.262</strong></td><td><strong>.163</strong></td>
+              <td>.507</td><td>.507</td>
+            </tr>
+            <tr>
+              <td>basic angular</td>
+              <td>.336</td><td>.296</td>
+              <td>.517</td><td>.377</td>
+              <td>.544</td><td>.383</td>
+              <td>.412</td><td>.353</td>
+              <td>.255</td><td>.157</td>
+              <td>.463</td><td>.463</td>
+            </tr>
+            <tr>
+              <td>MuJoCo kinetic</td>
+              <td>.329</td><td>.282</td>
+              <td>.496</td><td>.337</td>
+              <td>.525</td><td>.341</td>
+              <td>.422</td><td>.352</td>
+              <td>.260</td><td>.157</td>
+              <td>.552</td><td>.552</td>
+            </tr>
+            <tr>
+              <td>MuJoCo angular</td>
+              <td>.330</td><td>.283</td>
+              <td>.499</td><td>.341</td>
+              <td>.527</td><td>.345</td>
+              <td>.422</td><td>.351</td>
+              <td>.260</td><td>.158</td>
+              <td>.543</td><td>.543</td>
+            </tr>
+            <tr>
+              <td>MuJoCo ellipsoid</td>
+              <td>.324</td><td>.271</td>
+              <td>.494</td><td>.334</td>
+              <td>.522</td><td>.339</td>
+              <td>.437</td><td>.367</td>
+              <td>.261</td><td>.160</td>
+              <td>.547</td><td>.547</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Oracle 3D fitting results -->
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Oracle 3D Fitting</h3>
+      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+        Frame-weighted mean 3D error (dm) and arc-specific error (dm); lower is better. Per-frame
+        errors capped at 25 dm. Best per column in <strong>bold</strong>.
+      </p>
+      <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th rowspan="2" style="vertical-align: middle;">Model</th>
+              <th colspan="2" class="has-text-centered">LP</th>
+              <th colspan="2" class="has-text-centered">EB</th>
+              <th colspan="2" class="has-text-centered">SW</th>
+              <th colspan="2" class="has-text-centered">ISSIA</th>
+              <th colspan="2" class="has-text-centered">APIDIS</th>
+            </tr>
+            <tr>
+              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>parabola</td>
+              <td>3.16</td><td>4.68</td>
+              <td>3.80</td><td>5.88</td>
+              <td>1.92</td><td>7.24</td>
+              <td>5.90</td><td>3.64</td>
+              <td>4.55</td><td>4.55</td>
+            </tr>
+            <tr>
+              <td>kinetic</td>
+              <td>3.20</td><td>4.74</td>
+              <td>3.68</td><td>5.26</td>
+              <td>1.86</td><td>6.05</td>
+              <td>5.54</td><td>2.80</td>
+              <td>3.68</td><td>3.68</td>
+            </tr>
+            <tr>
+              <td>fitg</td>
+              <td>2.75</td><td>3.12</td>
+              <td>3.48</td><td>4.14</td>
+              <td><strong>1.78</strong></td><td>5.89</td>
+              <td>5.34</td><td>2.36</td>
+              <td>3.12</td><td>3.12</td>
+            </tr>
+            <tr>
+              <td><strong>angular</strong></td>
+              <td><strong>2.24</strong></td><td><strong>1.83</strong></td>
+              <td><strong>3.28</strong></td><td><strong>3.32</strong></td>
+              <td>1.83</td><td><strong>5.77</strong></td>
+              <td><strong>5.22</strong></td><td><strong>2.08</strong></td>
+              <td><strong>2.56</strong></td><td><strong>2.56</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Static vs broadcast -->
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Static vs Broadcast Camera</h3>
+      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+        Mean 3D error (m) by camera type on LP for the two best-performing models.
+      </p>
+      <div class="table-container" style="max-width: 600px; margin: 0 auto;">
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th rowspan="2" style="vertical-align: middle;">Model</th>
+              <th colspan="3" class="has-text-centered">LP-static</th>
+              <th colspan="3" class="has-text-centered">LP-broadcast</th>
+            </tr>
+            <tr>
+              <th>Full</th><th>Str</th><th>Arc</th>
+              <th>Full</th><th>Str</th><th>Arc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>basic fitg</td>
+              <td>0.93</td><td>0.74</td><td>1.44</td>
+              <td>1.24</td><td>0.85</td><td>2.59</td>
+            </tr>
+            <tr>
+              <td>basic angular</td>
+              <td>0.89</td><td>0.67</td><td>1.48</td>
+              <td>1.20</td><td>0.80</td><td>2.62</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- End results -->
+
+
+  <!-- Key finding -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Key Finding</h2>
+          <div class="content has-text-justified">
+            <p>
+              The ranking reversal between protocols reflects an <strong>observation-noise
+              bottleneck</strong>: monocular geometric ambiguity prevents spin-decomposition models
+              from exploiting their extra parameters, so the single-parameter <em>basic fitg</em>
+              model suffices under 2D fitting, whereas 3D inputs unlock the richer <em>basic
+              angular</em> model. This shows that&mdash;among the models tested&mdash;observation
+              noise and the inherent geometric ambiguity of monocular reconstruction, rather than
+              model expressiveness, are the current bottleneck.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End key finding -->
+
+
+  <!-- Qualitative results carousel -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+        <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+          Q-Q plots comparing estimated vs ground-truth drag coefficients and velocities across
+          datasets.
+        </p>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/q_q_drag_0.png" alt="Q-Q drag plot 1" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_drag_1.png" alt="Q-Q drag plot 2" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_drag_2.png" alt="Q-Q drag plot 3" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_drag_3.png" alt="Q-Q drag plot 4" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_drag_4.png" alt="Q-Q drag plot 5" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_0.png" alt="Q-Q velocity plot 1" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_1.png" alt="Q-Q velocity plot 2" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_2.png" alt="Q-Q velocity plot 3" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_3.png" alt="Q-Q velocity plot 4" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_4.png" alt="Q-Q velocity plot 5" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_5.png" alt="Q-Q velocity plot 6" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_6.png" alt="Q-Q velocity plot 7" />
+          </div>
+          <div class="item">
+            <img src="static/images/q_q_vel_7.png" alt="Q-Q velocity plot 8" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End qualitative results carousel -->
+
+
+  <!-- Poster (placeholder) -->
+  <!--
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title has-text-centered">Poster</h2>
+        <iframe src="static/pdfs/poster.pdf" width="100%" height="600">
+        </iframe>
+      </div>
+    </div>
+  </section>
+  -->
+
+
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@InProceedings{Grad_2026_CVPR,
+    author    = {Grad, {\L}ukasz and Czajkowski, Krzysztof M. and Varashylau, Aliaksandr},
+    title     = {Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video: A Multi-Model Benchmark},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2026}
+}</code></pre>
+    </div>
+  </section>
+  <!-- End BibTeX -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a
+                href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page. This
+              website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
