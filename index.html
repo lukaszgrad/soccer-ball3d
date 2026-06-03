@@ -144,53 +144,24 @@
   </section>
 
 
-  <!-- Teaser video carousel -->
+  <!-- Teaser video -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <div id="teaser-carousel" class="carousel results-carousel">
-          <div class="item">
-            <video autoplay muted loop playsinline style="width: 100%;">
-              <source src="static/videos/teaser_lp_broadcast_1.mp4" type="video/mp4">
-            </video>
-            <h2 class="subtitle has-text-centered is-size-6">
-              <strong>Monocular 3D reconstruction</strong> on Legia-Piast (broadcast view). Our best
-              monocular model (red) and its pitch-plane shadow (blue) track the triangulated 3D
-              ground truth (green) and its shadow (dark green); per-clip 3D RMSE is shown in the
-              bottom-right corner.
-            </h2>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline style="width: 100%;">
-              <source src="static/videos/teaser_lp_broadcast_2.mp4" type="video/mp4">
-            </video>
-            <h2 class="subtitle has-text-centered is-size-6">
-              Legia-Piast (broadcast view). A high, lofted arc where monocular depth is most
-              ambiguous and reconstruction error grows.
-            </h2>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline style="width: 100%;">
-              <source src="static/videos/teaser_lp_static.mp4" type="video/mp4">
-            </video>
-            <h2 class="subtitle has-text-centered is-size-6">
-              Legia-Piast (static camera). The reconstructed trajectory closely matches the
-              triangulated 3D ground truth.
-            </h2>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline style="width: 100%;">
-              <source src="static/videos/teaser_eb.mp4" type="video/mp4">
-            </video>
-            <h2 class="subtitle has-text-centered is-size-6">
-              Ekstraklasa-Broadcast. A long, flat drive reconstructed from a single broadcast view.
-            </h2>
-          </div>
-        </div>
+        <video autoplay muted loop playsinline style="width: 100%;">
+          <source src="static/videos/teaser_qualitative.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered is-size-6">
+          <strong>Monocular 3D reconstruction</strong> from our best monocular model across four
+          trajectory segments (Legia-Piast broadcast and static cameras, Ekstraklasa-Broadcast). In
+          each panel, the predicted 3D trajectory (red) and its pitch-plane shadow (blue) track the
+          triangulated 3D ground truth (green) and its shadow (dark green); per-clip 3D RMSE is shown
+          in the bottom-right corner.
+        </h2>
       </div>
     </div>
   </section>
-  <!-- End teaser video carousel -->
+  <!-- End teaser video -->
 
 
   <!-- Abstract -->
@@ -201,28 +172,26 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              We study physics-based 3D ball trajectory reconstruction from monocular soccer video.
+              We study physics-based 3D ball trajectory reconstruction from monocular videos.
               Our pipeline segments the trajectory at contact events and fits each segment by
-              optimizing a forward-simulated flight model with a reprojection-based objective. We
-              implement seven arc models of increasing complexity&mdash;from gravity-only parabolas
-              to MuJoCo simulations with drag, spin, and fluid forces&mdash;and evaluate all seven
-              under end-to-end monocular reconstruction with four models additionally evaluated
+              optimizing a forward-simulated flight model with a reprojection-based objective.
+              We implement seven arc models of increasing complexity, ranging from gravity-only
+              parabolas to MuJoCo simulations with drag, spin, and fluid forces. All seven are
+              evaluated under end-to-end monocular reconstruction, with four additionally evaluated
               under multi-view 3D reconstruction.
             </p>
             <p>
-              The two protocols yield opposite model rankings: a model with a free gravitational
-              constant achieves the best accuracy under monocular reconstruction on all evaluation
-              settings, yet a spin-decomposition model leads on four of five datasets when fitted to
-              3D ground truth&mdash;showing that, among the models tested, observation noise and the
-              inherent geometric ambiguity of monocular reconstruction, rather than model
-              expressiveness, are the current bottleneck.
+              The two protocols yield reversed model rankings: a model with fitted gravitational
+              acceleration achieves the best monocular accuracy on all soccer evaluation settings,
+              yet a spin-decomposition model leads on four of five datasets when fitted to 3D ground
+              truth. These results suggest that observation noise and single-view geometric
+              ambiguity, rather than model expressiveness, are the primary limiting factors for
+              monocular soccer reconstruction.
             </p>
             <p>
-              Consistent with this, on the same match the broadcast view yields substantially higher
-              arc error than static cameras. We release three new soccer datasets&mdash;two with
-              triangulated 3D ground truth, one broadcast benchmark&mdash;along with segment-level
-              annotations for APIDIS and ISSIA-3D, forming a five-dataset evaluation benchmark
-              spanning nearly 6,000 trajectory segments.
+              We evaluate across five datasets spanning nearly 6,000 trajectory segments and
+              publicly release two new soccer datasets with triangulated 3D ground truth along with
+              segment-level annotations for APIDIS and ISSIA-3D.
             </p>
           </div>
         </div>
