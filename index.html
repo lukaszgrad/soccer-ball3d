@@ -231,95 +231,89 @@
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Physics Models</h2>
       <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
-        Comparison of arc physics models for projectile motion simulation. All models share the same
-        straight (on-ground) model with 5 parameters. N<sub>&theta;</sub> denotes the number of free
-        parameters optimized per arc segment.
+        Seven arc models of increasing complexity. A check (&check;) marks an enabled force or
+        feature; #Params is the number of free parameters optimized per arc segment.
       </p>
       <div class="table-container">
         <table class="table is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>Model</th>
-              <th>Framework</th>
-              <th>Gravity</th>
-              <th>Drag</th>
-              <th>Magnus</th>
-              <th>Spin (&omega;<sub>0</sub>)</th>
-              <th>N<sub>&theta;</sub></th>
+              <th class="has-text-centered">MuJoCo</th>
+              <th class="has-text-centered">Fitted Gravity</th>
+              <th class="has-text-centered">Drag</th>
+              <th class="has-text-centered">Magnus</th>
+              <th class="has-text-centered">Spin (&omega;<sub>0</sub>)</th>
+              <th class="has-text-centered">#Params</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Basic parabola</td>
-              <td>ODE</td>
-              <td>fixed</td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>6</td>
+              <td>parabola</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">6</td>
             </tr>
             <tr>
-              <td>Basic kinetic</td>
-              <td>ODE</td>
-              <td>fixed</td>
-              <td>k<sub>3</sub></td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>7</td>
+              <td>kinetic</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">7</td>
             </tr>
             <tr>
-              <td>Basic fitg</td>
-              <td>ODE</td>
-              <td>fitted*</td>
-              <td>k<sub>3</sub></td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>8</td>
+              <td>fitg</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">8</td>
             </tr>
             <tr>
-              <td>Basic angular</td>
-              <td>ODE</td>
-              <td>fixed</td>
-              <td>k<sub>3</sub></td>
-              <td>k<sub>l</sub>, k<sub>s</sub></td>
-              <td>&mdash;</td>
-              <td>9</td>
+              <td>angular</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">9</td>
             </tr>
             <tr>
               <td>MuJoCo kinetic</td>
-              <td>MuJoCo ODE</td>
-              <td>fixed</td>
-              <td>fixed&dagger;</td>
-              <td>&mdash;</td>
-              <td>&mdash;</td>
-              <td>6</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">6</td>
             </tr>
             <tr>
               <td>MuJoCo angular</td>
-              <td>MuJoCo ODE</td>
-              <td>fixed</td>
-              <td>fixed&dagger;</td>
-              <td>&mdash;</td>
-              <td>&check;</td>
-              <td>9</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">9</td>
             </tr>
             <tr>
               <td>MuJoCo ellipsoid</td>
-              <td>MuJoCo ODE</td>
-              <td>fixed</td>
-              <td>C<sub>D</sub><sup>blunt</sup>, C<sub>D</sub><sup>ang</sup></td>
-              <td>C<sub>M</sub></td>
-              <td>&check;</td>
-              <td>12</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">&check;</td>
+              <td class="has-text-centered">12</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="is-size-7">
-        * Gravity is fitted rather than fixed, acting as a proxy for unmodelled forces.<br>
-        &dagger; MuJoCo's inertia-based fluid model provides drag with fixed parameters derived from
-        fluid density and body inertia.
-      </p>
     </div>
   </section>
   <!-- End physics models table -->
@@ -329,201 +323,208 @@
   <section class="section">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Results</h2>
+      <div class="tabs is-centered is-toggle is-small" id="results-tabs" style="margin-bottom: 1.5rem;">
+        <ul>
+          <li class="is-active" data-target="results-monocular"><a>Monocular 3D</a></li>
+          <li data-target="results-multiview"><a>Multi-view 3D</a></li>
+          <li data-target="results-static"><a>Static vs Broadcast</a></li>
+        </ul>
+      </div>
 
       <!-- Monocular 3D reconstruction results -->
-      <h3 class="title is-4 has-text-centered">Monocular 3D Reconstruction</h3>
-      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
-        Balanced mAP (mAP<sub>bal</sub>) and arc-specific mAP (mAP<sub>arc</sub>); higher is
-        better. Best per column in <strong>bold</strong>.
-      </p>
-      <div class="table-container">
-        <table class="table is-striped is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th rowspan="2" style="vertical-align: middle;">Model</th>
-              <th colspan="2" class="has-text-centered">LP-static</th>
-              <th colspan="2" class="has-text-centered">LP-broadcast</th>
-              <th colspan="2" class="has-text-centered">EB</th>
-              <th colspan="2" class="has-text-centered">SW</th>
-              <th colspan="2" class="has-text-centered">ISSIA-3D</th>
-              <th colspan="2" class="has-text-centered">APIDIS</th>
-            </tr>
-            <tr>
-              <th>bal</th>
-              <th>arc</th>
-              <th>bal</th>
-              <th>arc</th>
-              <th>bal</th>
-              <th>arc</th>
-              <th>bal</th>
-              <th>arc</th>
-              <th>bal</th>
-              <th>arc</th>
-              <th>bal</th>
-              <th>arc</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>basic parabola</td>
-              <td>.325</td><td>.274</td>
-              <td>.493</td><td>.330</td>
-              <td>.533</td><td>.357</td>
-              <td>.421</td><td>.351</td>
-              <td>.260</td><td>.159</td>
-              <td><strong>.577</strong></td><td><strong>.577</strong></td>
-            </tr>
-            <tr>
-              <td>basic kinetic</td>
-              <td>.332</td><td>.289</td>
-              <td>.508</td><td>.359</td>
-              <td>.532</td><td>.359</td>
-              <td>.414</td><td>.355</td>
-              <td>.253</td><td>.153</td>
-              <td>.476</td><td>.476</td>
-            </tr>
-            <tr>
-              <td><strong>basic fitg</strong></td>
-              <td><strong>.343</strong></td><td><strong>.307</strong></td>
-              <td><strong>.530</strong></td><td><strong>.397</strong></td>
-              <td><strong>.557</strong></td><td><strong>.412</strong></td>
-              <td><strong>.459</strong></td><td><strong>.371</strong></td>
-              <td><strong>.262</strong></td><td><strong>.163</strong></td>
-              <td>.507</td><td>.507</td>
-            </tr>
-            <tr>
-              <td>basic angular</td>
-              <td>.336</td><td>.296</td>
-              <td>.517</td><td>.377</td>
-              <td>.544</td><td>.383</td>
-              <td>.412</td><td>.353</td>
-              <td>.255</td><td>.157</td>
-              <td>.463</td><td>.463</td>
-            </tr>
-            <tr>
-              <td>MuJoCo kinetic</td>
-              <td>.329</td><td>.282</td>
-              <td>.496</td><td>.337</td>
-              <td>.525</td><td>.341</td>
-              <td>.422</td><td>.352</td>
-              <td>.260</td><td>.157</td>
-              <td>.552</td><td>.552</td>
-            </tr>
-            <tr>
-              <td>MuJoCo angular</td>
-              <td>.330</td><td>.283</td>
-              <td>.499</td><td>.341</td>
-              <td>.527</td><td>.345</td>
-              <td>.422</td><td>.351</td>
-              <td>.260</td><td>.158</td>
-              <td>.543</td><td>.543</td>
-            </tr>
-            <tr>
-              <td>MuJoCo ellipsoid</td>
-              <td>.324</td><td>.271</td>
-              <td>.494</td><td>.334</td>
-              <td>.522</td><td>.339</td>
-              <td>.437</td><td>.367</td>
-              <td>.261</td><td>.160</td>
-              <td>.547</td><td>.547</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="results-monocular" class="results-panel">
+        <h3 class="title is-4 has-text-centered">Monocular 3D Reconstruction</h3>
+        <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+          Balanced mAP (mAP<sub>bal</sub>) and arc-specific mAP (mAP<sub>arc</sub>); higher is
+          better. Best per column in <strong>bold</strong>.
+        </p>
+        <div class="table-container">
+          <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle;">Model</th>
+                <th colspan="2" class="has-text-centered">LP-static</th>
+                <th colspan="2" class="has-text-centered">LP-broadcast</th>
+                <th colspan="2" class="has-text-centered">EB</th>
+                <th colspan="2" class="has-text-centered">SW</th>
+                <th colspan="2" class="has-text-centered">ISSIA-3D</th>
+                <th colspan="2" class="has-text-centered">APIDIS</th>
+              </tr>
+              <tr>
+                <th>bal</th><th>arc</th>
+                <th>bal</th><th>arc</th>
+                <th>bal</th><th>arc</th>
+                <th>bal</th><th>arc</th>
+                <th>bal</th><th>arc</th>
+                <th>bal</th><th>arc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>basic parabola</td>
+                <td>.325</td><td>.274</td>
+                <td>.493</td><td>.330</td>
+                <td>.533</td><td>.357</td>
+                <td>.421</td><td>.351</td>
+                <td>.260</td><td>.159</td>
+                <td><strong>.577</strong></td><td><strong>.577</strong></td>
+              </tr>
+              <tr>
+                <td>basic kinetic</td>
+                <td>.332</td><td>.289</td>
+                <td>.508</td><td>.359</td>
+                <td>.532</td><td>.359</td>
+                <td>.414</td><td>.355</td>
+                <td>.253</td><td>.153</td>
+                <td>.476</td><td>.476</td>
+              </tr>
+              <tr>
+                <td><strong>basic fitg</strong></td>
+                <td><strong>.343</strong></td><td><strong>.307</strong></td>
+                <td><strong>.530</strong></td><td><strong>.397</strong></td>
+                <td><strong>.557</strong></td><td><strong>.412</strong></td>
+                <td><strong>.459</strong></td><td><strong>.371</strong></td>
+                <td><strong>.262</strong></td><td><strong>.163</strong></td>
+                <td>.507</td><td>.507</td>
+              </tr>
+              <tr>
+                <td>basic angular</td>
+                <td>.336</td><td>.296</td>
+                <td>.517</td><td>.377</td>
+                <td>.544</td><td>.383</td>
+                <td>.412</td><td>.353</td>
+                <td>.255</td><td>.157</td>
+                <td>.463</td><td>.463</td>
+              </tr>
+              <tr>
+                <td>MuJoCo kinetic</td>
+                <td>.329</td><td>.282</td>
+                <td>.496</td><td>.337</td>
+                <td>.525</td><td>.341</td>
+                <td>.422</td><td>.352</td>
+                <td>.260</td><td>.157</td>
+                <td>.552</td><td>.552</td>
+              </tr>
+              <tr>
+                <td>MuJoCo angular</td>
+                <td>.330</td><td>.283</td>
+                <td>.499</td><td>.341</td>
+                <td>.527</td><td>.345</td>
+                <td>.422</td><td>.351</td>
+                <td>.260</td><td>.158</td>
+                <td>.543</td><td>.543</td>
+              </tr>
+              <tr>
+                <td>MuJoCo ellipsoid</td>
+                <td>.324</td><td>.271</td>
+                <td>.494</td><td>.334</td>
+                <td>.522</td><td>.339</td>
+                <td>.437</td><td>.367</td>
+                <td>.261</td><td>.160</td>
+                <td>.547</td><td>.547</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Multi-view 3D reconstruction results -->
-      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Multi-view 3D Reconstruction</h3>
-      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
-        Frame-weighted mean 3D error (dm) and arc-specific error (dm); lower is better. Per-frame
-        errors capped at 25 dm. Best per column in <strong>bold</strong>.
-      </p>
-      <div class="table-container">
-        <table class="table is-striped is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th rowspan="2" style="vertical-align: middle;">Model</th>
-              <th colspan="2" class="has-text-centered">LP</th>
-              <th colspan="2" class="has-text-centered">EB</th>
-              <th colspan="2" class="has-text-centered">SW</th>
-              <th colspan="2" class="has-text-centered">ISSIA</th>
-              <th colspan="2" class="has-text-centered">APIDIS</th>
-            </tr>
-            <tr>
-              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
-              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
-              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
-              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
-              <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>parabola</td>
-              <td>3.16</td><td>4.68</td>
-              <td>3.80</td><td>5.88</td>
-              <td>1.92</td><td>7.24</td>
-              <td>5.90</td><td>3.64</td>
-              <td>4.55</td><td>4.55</td>
-            </tr>
-            <tr>
-              <td>kinetic</td>
-              <td>3.20</td><td>4.74</td>
-              <td>3.68</td><td>5.26</td>
-              <td>1.86</td><td>6.05</td>
-              <td>5.54</td><td>2.80</td>
-              <td>3.68</td><td>3.68</td>
-            </tr>
-            <tr>
-              <td>fitg</td>
-              <td>2.75</td><td>3.12</td>
-              <td>3.48</td><td>4.14</td>
-              <td><strong>1.78</strong></td><td>5.89</td>
-              <td>5.34</td><td>2.36</td>
-              <td>3.12</td><td>3.12</td>
-            </tr>
-            <tr>
-              <td><strong>angular</strong></td>
-              <td><strong>2.24</strong></td><td><strong>1.83</strong></td>
-              <td><strong>3.28</strong></td><td><strong>3.32</strong></td>
-              <td>1.83</td><td><strong>5.77</strong></td>
-              <td><strong>5.22</strong></td><td><strong>2.08</strong></td>
-              <td><strong>2.56</strong></td><td><strong>2.56</strong></td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="results-multiview" class="results-panel" style="display: none;">
+        <h3 class="title is-4 has-text-centered">Multi-view 3D Reconstruction</h3>
+        <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+          Frame-weighted mean 3D error (dm) and arc-specific error (dm); lower is better. Per-frame
+          errors capped at 25 dm. Best per column in <strong>bold</strong>.
+        </p>
+        <div class="table-container">
+          <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle;">Model</th>
+                <th colspan="2" class="has-text-centered">LP</th>
+                <th colspan="2" class="has-text-centered">EB</th>
+                <th colspan="2" class="has-text-centered">SW</th>
+                <th colspan="2" class="has-text-centered">ISSIA</th>
+                <th colspan="2" class="has-text-centered">APIDIS</th>
+              </tr>
+              <tr>
+                <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+                <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+                <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+                <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+                <th>e&#772;</th><th>e&#772;<sub>a</sub></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>parabola</td>
+                <td>3.16</td><td>4.68</td>
+                <td>3.80</td><td>5.88</td>
+                <td>1.92</td><td>7.24</td>
+                <td>5.90</td><td>3.64</td>
+                <td>4.55</td><td>4.55</td>
+              </tr>
+              <tr>
+                <td>kinetic</td>
+                <td>3.20</td><td>4.74</td>
+                <td>3.68</td><td>5.26</td>
+                <td>1.86</td><td>6.05</td>
+                <td>5.54</td><td>2.80</td>
+                <td>3.68</td><td>3.68</td>
+              </tr>
+              <tr>
+                <td>fitg</td>
+                <td>2.75</td><td>3.12</td>
+                <td>3.48</td><td>4.14</td>
+                <td><strong>1.78</strong></td><td>5.89</td>
+                <td>5.34</td><td>2.36</td>
+                <td>3.12</td><td>3.12</td>
+              </tr>
+              <tr>
+                <td><strong>angular</strong></td>
+                <td><strong>2.24</strong></td><td><strong>1.83</strong></td>
+                <td><strong>3.28</strong></td><td><strong>3.32</strong></td>
+                <td>1.83</td><td><strong>5.77</strong></td>
+                <td><strong>5.22</strong></td><td><strong>2.08</strong></td>
+                <td><strong>2.56</strong></td><td><strong>2.56</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Static vs broadcast -->
-      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Static vs Broadcast Camera</h3>
-      <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
-        Mean 3D error (m) by camera type on LP for the two best-performing models.
-      </p>
-      <div class="table-container" style="max-width: 600px; margin: 0 auto;">
-        <table class="table is-striped is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th rowspan="2" style="vertical-align: middle;">Model</th>
-              <th colspan="3" class="has-text-centered">LP-static</th>
-              <th colspan="3" class="has-text-centered">LP-broadcast</th>
-            </tr>
-            <tr>
-              <th>Full</th><th>Str</th><th>Arc</th>
-              <th>Full</th><th>Str</th><th>Arc</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>basic fitg</td>
-              <td>0.93</td><td>0.74</td><td>1.44</td>
-              <td>1.24</td><td>0.85</td><td>2.59</td>
-            </tr>
-            <tr>
-              <td>basic angular</td>
-              <td>0.89</td><td>0.67</td><td>1.48</td>
-              <td>1.20</td><td>0.80</td><td>2.62</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="results-static" class="results-panel" style="display: none;">
+        <h3 class="title is-4 has-text-centered">Static vs Broadcast Camera</h3>
+        <p class="has-text-centered is-size-6" style="margin-bottom: 1rem; font-style: italic;">
+          Mean 3D error (m) by camera type on LP for the two best-performing models.
+        </p>
+        <div class="table-container" style="max-width: 600px; margin: 0 auto;">
+          <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle;">Model</th>
+                <th colspan="3" class="has-text-centered">LP-static</th>
+                <th colspan="3" class="has-text-centered">LP-broadcast</th>
+              </tr>
+              <tr>
+                <th>Full</th><th>Str</th><th>Arc</th>
+                <th>Full</th><th>Str</th><th>Arc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>basic fitg</td>
+                <td>0.93</td><td>0.74</td><td>1.44</td>
+                <td>1.24</td><td>0.85</td><td>2.59</td>
+              </tr>
+              <tr>
+                <td>basic angular</td>
+                <td>0.89</td><td>0.67</td><td>1.48</td>
+                <td>1.20</td><td>0.80</td><td>2.62</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
