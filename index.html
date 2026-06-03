@@ -144,23 +144,53 @@
   </section>
 
 
-  <!-- Teaser image -->
+  <!-- Teaser video carousel -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <img src="static/images/fig1_datasets.png" alt="Dataset overview"
-          style="width: 100%;" />
-        <h2 class="subtitle has-text-centered is-size-6">
-          <strong>Dataset overview.</strong> Each column shows one of the five evaluation datasets
-          from two different viewpoints or sequences. Orange curves depict ground-truth 3D ball
-          trajectories projected onto the image; light-blue dots mark segment endpoints (pivot
-          points). The datasets span soccer and basketball, static multi-camera and dynamic broadcast
-          setups, and resolutions from 1080p to 4K.
-        </h2>
+        <div id="teaser-carousel" class="carousel results-carousel">
+          <div class="item">
+            <video autoplay muted loop playsinline style="width: 100%;">
+              <source src="static/videos/teaser_lp_broadcast_1.mp4" type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered is-size-6">
+              <strong>Monocular 3D reconstruction</strong> on Legia-Piast (broadcast view). Our best
+              monocular model (red) and its pitch-plane shadow (blue) track the triangulated 3D
+              ground truth (green) and its shadow (dark green); per-clip 3D RMSE is shown in the
+              bottom-right corner.
+            </h2>
+          </div>
+          <div class="item">
+            <video autoplay muted loop playsinline style="width: 100%;">
+              <source src="static/videos/teaser_lp_broadcast_2.mp4" type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered is-size-6">
+              Legia-Piast (broadcast view). A high, lofted arc where monocular depth is most
+              ambiguous and reconstruction error grows.
+            </h2>
+          </div>
+          <div class="item">
+            <video autoplay muted loop playsinline style="width: 100%;">
+              <source src="static/videos/teaser_lp_static.mp4" type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered is-size-6">
+              Legia-Piast (static camera). The reconstructed trajectory closely matches the
+              triangulated 3D ground truth.
+            </h2>
+          </div>
+          <div class="item">
+            <video autoplay muted loop playsinline style="width: 100%;">
+              <source src="static/videos/teaser_eb.mp4" type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered is-size-6">
+              Ekstraklasa-Broadcast. A long, flat drive reconstructed from a single broadcast view.
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-  <!-- End teaser image -->
+  <!-- End teaser video carousel -->
 
 
   <!-- Abstract -->
