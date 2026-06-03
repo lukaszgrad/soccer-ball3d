@@ -10,6 +10,8 @@
   <meta property="og:description"
     content="A multi-model benchmark for physics-based 3D ball trajectory reconstruction from monocular soccer video, evaluating seven arc models across five datasets." />
   <meta property="og:url" content="https://lukaszgrad.github.io/soccer-ball3d/" />
+  <meta property="og:site_name"
+    content="Physics-Based 3D Ball Trajectory Reconstruction from Monocular Soccer Video" />
   <meta property="og:image" content="static/images/fig1_datasets.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -78,6 +80,10 @@
                 <sup>*</sup>Equal contribution
               </span>
               <br>
+              <span class="author-block" style="font-size: 0.9em;">
+                Contact: <a href="mailto:l.grad@mimuw.edu.pl">l.grad@mimuw.edu.pl</a>
+              </span>
+              <br>
               <span class="author-block">
                 <a href="https://cvpr.thecvf.com/Conferences/2026" target="_blank">CVPR 2026</a>
               </span>
@@ -96,22 +102,21 @@
                   </a>
                 </span>
 
-                <!-- ArXiv link -->
+                <!-- Supplement link -->
                 <span class="link-block">
                   <a href="#" class="external-link button is-normal is-rounded is-dark"
                     title="Coming soon">
                     <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <i class="fas fa-file-pdf"></i>
                     </span>
-                    <span>arXiv</span>
+                    <span>Supplement</span>
                   </a>
                 </span>
 
                 <!-- Github link -->
                 <span class="link-block">
-                  <a href="#" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark"
-                    title="Coming soon">
+                  <a href="https://github.com/lukaszgrad/ball3d" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -550,8 +555,43 @@
   <!-- End key finding -->
 
 
-  <!-- Poster (placeholder) -->
-  <!--
+  <!-- Image carousel -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <!-- Legia-Piast results -->
+            <img src="static/images/fig_qualitative_lp.png" alt="Qualitative model comparison on the Legia-Piast dataset" />
+            <h3 class="subtitle has-text-centered is-size-6">
+              Qualitative model comparison on the Legia-Piast dataset (static and broadcast cameras). Each column
+              corresponds to one physics model. Red dots show the predicted 3D trajectory projected onto the video
+              frame; green dots show the oracle 3D ground truth; blue and dark-green dots show the corresponding
+              pitch-plane (ground) projections of the prediction and ground truth; yellow markers indicate segment
+              endpoints (pivot points). Per-panel 3D RMSE in meters is overlaid in the bottom-right corner.
+            </h3>
+          </div>
+          <div class="item">
+            <!-- Ekstraklasa-Broadcast + APIDIS results -->
+            <img src="static/images/fig_qualitative_eb.png" alt="Qualitative model comparison on the Ekstraklasa-Broadcast and APIDIS datasets" />
+            <h3 class="subtitle has-text-centered is-size-6">
+              Qualitative model comparison on the Ekstraklasa-Broadcast (five matches) and APIDIS (basketball)
+              datasets. Each column corresponds to one physics model. Red dots show the predicted 3D trajectory
+              projected onto the video frame; green dots show the oracle 3D ground truth; blue and dark-green dots
+              show the corresponding pitch-plane (ground) projections of the prediction and ground truth; yellow
+              markers indicate segment endpoints (pivot points). Per-panel 3D RMSE in meters is overlaid in the
+              bottom-right corner.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End image carousel -->
+
+
+  <!-- Poster -->
   <section class="hero is-small is-light">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -561,7 +601,7 @@
       </div>
     </div>
   </section>
-  -->
+  <!-- End poster -->
 
 
   <!-- BibTeX -->
